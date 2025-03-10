@@ -9,7 +9,7 @@ int main() {
     auto a_shared_secret = x25519(b_pub_key, a_sec_key);
     auto b_shared_secret = x25519(a_pub_key, b_sec_key);
 
-    assert(a_shared_secret == a_shared_secret);
+    assert(a_shared_secret == b_shared_secret);
 
     return 0;
 }
