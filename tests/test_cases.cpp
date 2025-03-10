@@ -355,11 +355,13 @@ TEST_CASE("pow2", "[FieldElement]") {
 TEST_CASE("diffie_hellman", "[x25519]") {
     using namespace curve25519;
 
-    auto [a_sec_key, a_pub_key] = generate_keys();
-    auto [b_sec_key, b_pub_key] = generate_keys();
+    for (size_t i = 0; i < 100; ++i) {
+        auto [a_sec_key, a_pub_key] = generate_keys();
+        auto [b_sec_key, b_pub_key] = generate_keys();
 
-    auto a_shared_secret = x25519(b_pub_key, a_sec_key);
-    auto b_shared_secret = x25519(a_pub_key, b_sec_key);
+        auto a_shared_secret = x25519(b_pub_key, a_sec_key);
+        auto b_shared_secret = x25519(a_pub_key, b_sec_key);
 
-    REQUIRE(a_shared_secret == b_shared_secret);
+        REQUIRE(a_shared_secret == b_shared_secret);
+    }
 }
