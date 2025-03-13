@@ -28,7 +28,7 @@ TEST_CASE("rfc7748_0", "[Point]") {
     
     std::array<uint8_t, 32> result_bytes = {};
 
-    x25519(BASE_BYTES.data(), EXPONENT_BYTES.data(), result_bytes.data());
+    diffie_hellman(BASE_BYTES.data(), EXPONENT_BYTES.data(), result_bytes.data());
 
     REQUIRE(result_bytes == EXPECTED_RESULT_BYTES);
 }
@@ -51,7 +51,7 @@ TEST_CASE("rfc7748_1", "[Point]") {
 
     std::array<uint8_t, 32> r = {};
 
-    x25519(u.data(), k.data(), r.data());
+    diffie_hellman(u.data(), k.data(), r.data());
 
     u = k;
     k = r;
@@ -64,7 +64,7 @@ TEST_CASE("rfc7748_1", "[Point]") {
     }));
 
     for (size_t i = 1; i < 1000; ++i) {
-        x25519(u.data(), k.data(), r.data());
+        diffie_hellman(u.data(), k.data(), r.data());
         u = k;
         k = r;
     }
@@ -358,8 +358,8 @@ TEST_CASE("diffie_hellman", "[x25519]") {
         auto [a_sec_key, a_pub_key] = generate_keys();
         auto [b_sec_key, b_pub_key] = generate_keys();
 
-        auto a_shared_secret = x25519(b_pub_key, a_sec_key);
-        auto b_shared_secret = x25519(a_pub_key, b_sec_key);
+        auto a_shared_secret = diffie_hellman(b_pub_key, a_sec_key);
+        auto b_shared_secret = diffie_hellman(a_pub_key, b_sec_key);
 
         REQUIRE(a_shared_secret == b_shared_secret);
     }

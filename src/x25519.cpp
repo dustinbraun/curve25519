@@ -20,7 +20,7 @@ void generate_keys(
 }
 
 void
-x25519(
+diffie_hellman(
     const uint8_t * base_bytes,
     const uint8_t * exponent_bytes,
     uint8_t* result_bytes

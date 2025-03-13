@@ -19,16 +19,16 @@ generate_keys() noexcept {
     return { sec_key, pub_key };
 }
 
-void x25519(const uint8_t * base_bytes, const uint8_t * exponent_bytes, uint8_t* result_bytes) noexcept;
+void diffie_hellman(const uint8_t * base_bytes, const uint8_t * exponent_bytes, uint8_t* result_bytes) noexcept;
 
 inline
 std::array<uint8_t, 32>
-x25519(
+diffie_hellman(
     const std::array<uint8_t, 32> & base, // their pub. key
     const std::array<uint8_t, 32> & exponent // my pri. key
 ) noexcept {
     std::array<uint8_t, 32> result;
-    x25519(base.data(), exponent.data(), result.data());
+    diffie_hellman(base.data(), exponent.data(), result.data());
     return result;
 }
 
