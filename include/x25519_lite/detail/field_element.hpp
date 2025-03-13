@@ -4,10 +4,12 @@
 
 namespace x25519_lite {
 
+namespace detail {
+
 // This class provided 256-bit unsigned integer modulus P operations.
 class FieldElement {
 public:
-    CURVE25519_INLINE constexpr
+    constexpr
     FieldElement(
         uint32_t limb0,
         uint32_t limb1,
@@ -69,7 +71,6 @@ public:
     to_mod_p(
     ) noexcept;
 
-    CURVE25519_INLINE
     FieldElement
     add(
         const FieldElement & rhs
@@ -77,7 +78,6 @@ public:
         return (*this) + rhs;
     }
 
-    CURVE25519_INLINE
     FieldElement
     sub(
         const FieldElement & rhs
@@ -85,7 +85,6 @@ public:
         return (*this) - rhs;
     }
 
-    CURVE25519_INLINE
     FieldElement
     mul(
         const FieldElement & rhs
@@ -106,7 +105,6 @@ public:
     inverse(
     ) const noexcept;
 
-    CURVE25519_INLINE
     bool
     get_bit(
         size_t index
@@ -230,4 +228,5 @@ constexpr FieldElement FE_G_X = FieldElement(
     0x00000000
 );
 
+} // namespace detail
 } // namespace x25519_lite

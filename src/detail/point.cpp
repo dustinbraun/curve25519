@@ -4,6 +4,8 @@
 
 namespace x25519_lite {
 
+namespace detail {
+
 namespace {
 
 std::pair<FieldElement, FieldElement>
@@ -23,7 +25,7 @@ conditional_swap(
 } // anon. namespace
 
 Point
-Point::mul(
+Point::operator * (
     const FieldElement& rhs
 ) const noexcept {
     // Montgomery Ladder from IRTF RFC 7748.
@@ -67,4 +69,5 @@ Point::mul(
     return Point(x_2.mul(z_2.inverse()));
 }
 
+} // namespace detail
 } // namespace x25519_lite

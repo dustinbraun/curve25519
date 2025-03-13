@@ -59,6 +59,8 @@ reduce_carry(
 
 } // anon. namespace
 
+namespace detail {
+
 FieldElement::FieldElement(const uint8_t *bytes) noexcept {
     assert(bytes);
     m_limbs[0] = (uint32_t)bytes[ 0] | ((uint32_t)bytes[ 1] << 8) | ((uint32_t)bytes[ 2] << 16) | ((uint32_t)bytes[ 3] << 24);
@@ -412,4 +414,5 @@ FieldElement FieldElement::wrapping_sub_p() const noexcept {
     );
 }
 
+} // namespace detail
 } // namespace x25519_lite

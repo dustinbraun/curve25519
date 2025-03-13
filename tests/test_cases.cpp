@@ -108,7 +108,7 @@ TEST_CASE("from-and-to bytes", "[FieldElement]") {
 
     uint8_t res_bytes[32];
 
-    x25519_lite::FieldElement fe(BYTES);
+    x25519_lite::detail::FieldElement fe(BYTES);
     fe.to_bytes(res_bytes);
 
     REQUIRE(std::memcmp(BYTES, res_bytes, 32) == 0);
@@ -116,6 +116,7 @@ TEST_CASE("from-and-to bytes", "[FieldElement]") {
 
 TEST_CASE("add edge-cases", "[FieldElement]") {
     using namespace x25519_lite;
+    using namespace detail;
      
     REQUIRE((FE_0 + FE_0) == FE_0);
     REQUIRE((FE_0 + FE_1) == FE_1);
@@ -130,6 +131,7 @@ TEST_CASE("add edge-cases", "[FieldElement]") {
 
 TEST_CASE("sub edge-cases", "[FieldElement]") {
     using namespace x25519_lite;
+    using namespace detail;
 
     REQUIRE((FE_0 - FE_0) == FE_0);
     REQUIRE((FE_0 - FE_1) == FE_P_MINUS_1);
@@ -138,6 +140,7 @@ TEST_CASE("sub edge-cases", "[FieldElement]") {
 
 TEST_CASE("mul edge-cases", "[FieldElement]") {
     using namespace x25519_lite;
+    using namespace detail;
 
     REQUIRE((FE_0 * FE_0) == FE_0);
     REQUIRE((FE_0 * FE_1) == FE_0);
@@ -153,6 +156,7 @@ TEST_CASE("mul edge-cases", "[FieldElement]") {
 
 TEST_CASE("mul", "[FieldElement]") {
     using namespace x25519_lite;
+    using namespace detail;
 
     constexpr uint8_t LHS_BYTES[32] = {
         0x23, 0x57, 0x48, 0x29,
@@ -199,6 +203,7 @@ TEST_CASE("mul", "[FieldElement]") {
 
 TEST_CASE("inverse", "[FieldElement]") {
     using namespace x25519_lite;
+    using namespace detail;
 
     constexpr uint8_t BYTES[32] = {
         0x23, 0x57, 0x48, 0x29,
@@ -233,6 +238,7 @@ TEST_CASE("inverse", "[FieldElement]") {
 
 TEST_CASE("square", "[FieldElement]") {
     using namespace x25519_lite;
+    using namespace detail;
 
     constexpr uint8_t BYTES[32] = {
         0x23, 0x57, 0x48, 0x29,
@@ -287,6 +293,7 @@ TEST_CASE("square", "[FieldElement]") {
 
 TEST_CASE("to_mod_p", "[FieldElement]") {
     using namespace x25519_lite;
+    using namespace detail;
 
     FieldElement fe(FE_P);
     REQUIRE(fe.is_mod_p() == false);
@@ -295,6 +302,7 @@ TEST_CASE("to_mod_p", "[FieldElement]") {
 
 TEST_CASE("pow2", "[FieldElement]") {
     using namespace x25519_lite;
+    using namespace detail;
 
     constexpr uint8_t BYTES[32] = {
         0x23, 0x57, 0x48, 0x29,
@@ -353,6 +361,7 @@ TEST_CASE("pow2", "[FieldElement]") {
 
 TEST_CASE("diffie_hellman", "[x25519]") {
     using namespace x25519_lite;
+    using namespace detail;
 
     for (size_t i = 0; i < 100; ++i) {
         auto [a_sec_key, a_pub_key] = generate_keys();
