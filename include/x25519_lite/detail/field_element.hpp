@@ -9,8 +9,7 @@ namespace detail {
 // This class provided 256-bit unsigned integer modulus P operations.
 class FieldElement {
 public:
-    constexpr
-    FieldElement(
+    constexpr FieldElement(
         uint32_t limb0,
         uint32_t limb1,
         uint32_t limb2,
@@ -23,92 +22,35 @@ public:
 
     }
 
-    FieldElement(
-        const uint8_t *bytes
-    ) noexcept;
+    FieldElement(const uint8_t *bytes) noexcept;
 
-    bool
-    operator == (
-        const FieldElement& rhs
-    ) const noexcept;
+    bool operator == (const FieldElement& rhs) const noexcept;
 
-    bool
-    operator >= (
-        const FieldElement & rhs
-    ) const noexcept;
+    bool operator >= ( const FieldElement & rhs) const noexcept;
 
-    FieldElement
-    operator + (
-        const FieldElement& rhs
-    ) const noexcept;
+    FieldElement operator + (const FieldElement& rhs) const noexcept;
 
-    FieldElement
-    operator - (
-        const FieldElement& rhs
-    ) const noexcept;
+    FieldElement operator - (const FieldElement& rhs) const noexcept;
 
-    FieldElement
-    operator * (
-        const FieldElement& rhs
-    ) const noexcept;
+    FieldElement operator * (const FieldElement& rhs) const noexcept;
 
-    void
-    to_bytes(
-        uint8_t *bytes
-    ) const noexcept;
+    void to_bytes(uint8_t *bytes) const noexcept;
 
-    void
-    clamp_base() noexcept;
+    void clamp_base() noexcept;
     
-    void
-    clamp_exponent() noexcept;
+    void clamp_exponent() noexcept;
 
-    bool
-    is_mod_p(
-    ) const noexcept;
+    bool is_mod_p() const noexcept;
 
-    FieldElement
-    to_mod_p(
-    ) noexcept;
+    FieldElement to_mod_p() noexcept;
 
-    FieldElement
-    add(
-        const FieldElement & rhs
-    ) const noexcept {
-        return (*this) + rhs;
-    }
+    FieldElement pow(const FieldElement & rhs) const noexcept;
 
-    FieldElement
-    sub(
-        const FieldElement & rhs
-    ) const noexcept {
-        return (*this) - rhs;
-    }
+    FieldElement square() const noexcept;
 
-    FieldElement
-    mul(
-        const FieldElement & rhs
-    ) const noexcept {
-        return (*this) * rhs;
-    }
+    FieldElement inverse() const noexcept;
 
-    FieldElement
-    pow(
-        const FieldElement & rhs
-    ) const noexcept;
-
-    FieldElement
-    square(
-    ) const noexcept;
-
-    FieldElement
-    inverse(
-    ) const noexcept;
-
-    bool
-    get_bit(
-        size_t index
-    ) const noexcept {
+    bool get_bit(size_t index) const noexcept {
         assert(index < 256);
         return ((m_limbs[index/32] >> (index % 32)) & 1) != 0;
     }
@@ -118,26 +60,14 @@ private:
 
 
     // ToDo: Use std::pair to return sum and carry.
-    FieldElement
-    overflowing_add(
-        const FieldElement &rhs,
-        uint32_t &carry
-    ) const noexcept;
+    FieldElement overflowing_add(const FieldElement &rhs, uint32_t &carry) const noexcept;
 
     // ToDo: Use std::pair to return dif and borrow.
-    FieldElement
-    borrowing_sub(
-        const FieldElement &rhs,
-        uint32_t &borrow
-    ) const noexcept;
+    FieldElement borrowing_sub(const FieldElement &rhs, uint32_t &borrow) const noexcept;
 
-    FieldElement
-    wrapping_add_p(
-    ) const noexcept;
+    FieldElement wrapping_add_p() const noexcept;
 
-    FieldElement
-    wrapping_sub_p(
-    ) const noexcept;
+    FieldElement wrapping_sub_p() const noexcept;
 };
 
 constexpr FieldElement FE_0 = FieldElement(

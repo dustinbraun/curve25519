@@ -44,19 +44,19 @@ Point::operator * (
         auto [x_2a, x_3a] = conditional_swap(x_2, x_3, swap_condition);
         auto [z_2a, z_3a] = conditional_swap(z_2, z_3, swap_condition);
         swap_condition = k_t;
-        auto a = x_2a.add(z_2a);
-        auto aa = a.mul(a);
-        auto b = x_2a.sub(z_2a);
-        auto bb = b.mul(b);
-        auto e = aa.sub(bb);
-        auto c = x_3a.add(z_3a);
-        auto d = x_3a.sub(z_3a);
-        auto da = d.mul(a);
-        auto cb = c.mul(b);
-        auto x_3b = da.add(cb).square();
-        auto z_3b = x_1.mul(da.sub(cb).square());
-        auto x_2b = aa.mul(bb);
-        auto z_2b = e.mul(aa.add(FE_121665.mul(e))); // e * (aa + 121665 * e)
+        auto a = x_2a + z_2a;
+        auto aa = a.square();
+        auto b = x_2a - z_2a;
+        auto bb = b.square();
+        auto e = aa - bb;
+        auto c = x_3a + z_3a;
+        auto d = x_3a - z_3a;
+        auto da = d * a;
+        auto cb = c * b;
+        auto x_3b = (da + cb).square();
+        auto z_3b = x_1 * (da - cb).square();
+        auto x_2b = aa * bb;
+        auto z_2b = e * (aa + (FE_121665 * e));
         x_2 = x_2b;
         x_3 = x_3b;
         z_2 = z_2b;
@@ -66,7 +66,7 @@ Point::operator * (
     std::tie(x_2, std::ignore) = conditional_swap(x_2, x_3, swap_condition);
     std::tie(z_2, std::ignore) = conditional_swap(z_2, z_3, swap_condition);
 
-    return Point(x_2.mul(z_2.inverse()));
+    return Point(x_2 * z_2.inverse());
 }
 
 } // namespace detail
