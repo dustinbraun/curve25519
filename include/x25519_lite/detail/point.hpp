@@ -3,7 +3,7 @@
 #include "common.hpp"
 #include "field_element.hpp"
 
-namespace curve25519 {
+namespace x25519_lite {
 
 class Point {
 public:
@@ -49,4 +49,4 @@ private:
     FieldElement m_x;
 };
 
-} // namespace curve25519
+} // namespace x25519_lite

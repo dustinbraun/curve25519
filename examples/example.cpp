@@ -1,7 +1,9 @@
-#include <curve25519/x25519.hpp>
+#include <cassert>
+
+#include <x25519_lite/x25519.hpp>
 
 int main() {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     auto [a_sec_key, a_pub_key] = generate_keys();
     auto [b_sec_key, b_pub_key] = generate_keys();

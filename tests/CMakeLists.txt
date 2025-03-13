@@ -19,7 +19,7 @@ target_sources(test_cases
 )
 
 target_link_libraries(test_cases
-    PRIVATE curve25519
+    PRIVATE x25519_lite
     PRIVATE Catch2::Catch2WithMain
 )
 

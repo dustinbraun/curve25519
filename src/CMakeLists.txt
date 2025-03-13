@@ -1,6 +1,5 @@
-target_sources(curve25519
-    PRIVATE curve25519.cpp
-    PRIVATE field_element.cpp
-    PRIVATE point.cpp
+target_sources(x25519_lite
     PRIVATE x25519.cpp
 )
+
+add_subdirectory(detail)

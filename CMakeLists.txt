@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.23)
 
-project(curve25519)
+project(x25519_lite)
 
-add_library(curve25519)
+add_library(x25519_lite)
 
-target_include_directories(curve25519 PUBLIC include)
+target_include_directories(x25519_lite PUBLIC include)
 
-target_compile_features(curve25519 PRIVATE cxx_std_17)
+target_compile_features(x25519_lite PRIVATE cxx_std_17)
 
 add_subdirectory(examples)
 add_subdirectory(src)

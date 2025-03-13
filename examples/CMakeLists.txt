@@ -9,5 +9,5 @@ target_compile_features(example
 )
 
 target_link_libraries(example
-    PRIVATE curve25519
+    PRIVATE x25519_lite
 )

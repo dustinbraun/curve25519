@@ -1,8 +1,8 @@
-#include <curve25519/field_element.hpp>
-#include <curve25519/point.hpp>
-#include <curve25519/x25519.hpp>
+#include <x25519_lite/detail/field_element.hpp>
+#include <x25519_lite/detail/point.hpp>
+#include <x25519_lite/x25519.hpp>
 
-namespace curve25519 {
+namespace x25519_lite {
 
 // ToDo: Provide a strategy-class to provide user-defined (secure) random generation.
 void generate_keys(
@@ -36,4 +36,4 @@ x25519(
     secret.get_x().to_bytes(result_bytes);
 }
 
-} // namespace curve25519
+} // namespace x25519_lite

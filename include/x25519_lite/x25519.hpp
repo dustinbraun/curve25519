@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common.hpp"
+#include <array>
 
-namespace curve25519 {
+namespace x25519_lite {
     
 void generate_keys(
     uint8_t* sec_key_bytes,
@@ -32,4 +32,4 @@ x25519(
     return result;
 }
 
-} // namespace curve25519
+} // namespace x25519_lite

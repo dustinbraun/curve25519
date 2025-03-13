@@ -1,8 +1,8 @@
 #include <tuple>
 
-#include <curve25519/point.hpp>
+#include <x25519_lite/detail/point.hpp>
 
-namespace curve25519 {
+namespace x25519_lite {
 
 namespace {
 
@@ -67,4 +67,4 @@ Point::mul(
     return Point(x_2.mul(z_2.inverse()));
 }
 
-} // namespace curve25519
+} // namespace x25519_lite

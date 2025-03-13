@@ -1,8 +1,8 @@
 #include <tuple>
 
-#include <curve25519/field_element.hpp>
+#include <x25519_lite/detail/field_element.hpp>
 
-namespace curve25519 {
+namespace x25519_lite {
 
 namespace {
 
@@ -412,4 +412,4 @@ FieldElement FieldElement::wrapping_sub_p() const noexcept {
     );
 }
 
-} // namespace curve25519
+} // namespace x25519_lite

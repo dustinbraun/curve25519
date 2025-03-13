@@ -2,7 +2,7 @@
 
 #include "common.hpp"
 
-namespace curve25519 {
+namespace x25519_lite {
 
 // This class provided 256-bit unsigned integer modulus P operations.
 class FieldElement {
@@ -230,4 +230,4 @@ constexpr FieldElement FE_G_X = FieldElement(
     0x00000000
 );
 
-} // namespace curve25519
+} // namespace x25519_lite

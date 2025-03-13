@@ -1,12 +1,11 @@
-#include <iostream>
-
 #include <catch2/catch_test_macros.hpp>
 
-#include <curve25519/x25519.hpp>
-#include <curve25519/curve25519.hpp>
+#include <x25519_lite/x25519.hpp>
+#include <x25519_lite/detail/field_element.hpp>
+#include <x25519_lite/detail/point.hpp>
 
 TEST_CASE("rfc7748_0", "[Point]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     constexpr std::array<uint8_t, 32> BASE_BYTES = {
         0xe6, 0xdb, 0x68, 0x67, 0x58, 0x30, 0x30, 0xdb,
@@ -35,7 +34,7 @@ TEST_CASE("rfc7748_0", "[Point]") {
 }
 
 TEST_CASE("rfc7748_1", "[Point]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     std::array<uint8_t, 32> u = {
         0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -109,14 +108,14 @@ TEST_CASE("from-and-to bytes", "[FieldElement]") {
 
     uint8_t res_bytes[32];
 
-    curve25519::FieldElement fe(BYTES);
+    x25519_lite::FieldElement fe(BYTES);
     fe.to_bytes(res_bytes);
 
     REQUIRE(std::memcmp(BYTES, res_bytes, 32) == 0);
 }
 
 TEST_CASE("add edge-cases", "[FieldElement]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
      
     REQUIRE((FE_0 + FE_0) == FE_0);
     REQUIRE((FE_0 + FE_1) == FE_1);
@@ -130,7 +129,7 @@ TEST_CASE("add edge-cases", "[FieldElement]") {
 }
 
 TEST_CASE("sub edge-cases", "[FieldElement]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     REQUIRE((FE_0 - FE_0) == FE_0);
     REQUIRE((FE_0 - FE_1) == FE_P_MINUS_1);
@@ -138,7 +137,7 @@ TEST_CASE("sub edge-cases", "[FieldElement]") {
 }
 
 TEST_CASE("mul edge-cases", "[FieldElement]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     REQUIRE((FE_0 * FE_0) == FE_0);
     REQUIRE((FE_0 * FE_1) == FE_0);
@@ -153,7 +152,7 @@ TEST_CASE("mul edge-cases", "[FieldElement]") {
 }
 
 TEST_CASE("mul", "[FieldElement]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     constexpr uint8_t LHS_BYTES[32] = {
         0x23, 0x57, 0x48, 0x29,
@@ -199,7 +198,7 @@ TEST_CASE("mul", "[FieldElement]") {
 }
 
 TEST_CASE("inverse", "[FieldElement]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     constexpr uint8_t BYTES[32] = {
         0x23, 0x57, 0x48, 0x29,
@@ -233,7 +232,7 @@ TEST_CASE("inverse", "[FieldElement]") {
 }
 
 TEST_CASE("square", "[FieldElement]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     constexpr uint8_t BYTES[32] = {
         0x23, 0x57, 0x48, 0x29,
@@ -287,7 +286,7 @@ TEST_CASE("square", "[FieldElement]") {
 }
 
 TEST_CASE("to_mod_p", "[FieldElement]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     FieldElement fe(FE_P);
     REQUIRE(fe.is_mod_p() == false);
@@ -295,7 +294,7 @@ TEST_CASE("to_mod_p", "[FieldElement]") {
 }
 
 TEST_CASE("pow2", "[FieldElement]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     constexpr uint8_t BYTES[32] = {
         0x23, 0x57, 0x48, 0x29,
@@ -353,7 +352,7 @@ TEST_CASE("pow2", "[FieldElement]") {
 }
 
 TEST_CASE("diffie_hellman", "[x25519]") {
-    using namespace curve25519;
+    using namespace x25519_lite;
 
     for (size_t i = 0; i < 100; ++i) {
         auto [a_sec_key, a_pub_key] = generate_keys();
